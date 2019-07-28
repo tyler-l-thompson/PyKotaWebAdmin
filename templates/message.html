@@ -1,0 +1,30 @@
+<html>
+{% include 'header.html' %}
+	<head>
+		<META HTTP-EQUIV="refresh"  CONTENT="6;url={{ returnurl }}">
+	</head>
+	<body>
+		<div class='message'>
+		{% if alertLevel == "error" %}
+			<p style='color: red; font-weight: bold;'>
+				Error:
+			</p>
+		{% elif alertLevel == "success" %}
+			<p style='color: green; font-weight: bold;'>
+				Success:
+			</p>
+		{% endif %}
+			<p>
+				{{message}}
+			</p>
+			<div style="text-align: center;">
+				<a href='{{ returnurl }}'><img border='0' alt='refresh' src='/static/return.png' width='25' height='25'></a>
+			</div>
+		</div>
+		<p/>
+		{% if includeUserSummary == True %}
+			{% include 'usersummary.html' %}
+		{% endif %}
+		
+	</body>
+</html>

@@ -1,0 +1,85 @@
+<html>
+	{% include 'header.html' %}
+	{% include 'groups/groupsummary.html' %}
+	<br/>
+	<div class='pagesubtitle'>
+		Add Single Group
+	</div>
+	<p/>
+	<form action='/addgroup' method='post' >
+		<input type='hidden' name='addtype' value='single' />
+		<div class='summarytablewrapper'>
+			<table class='summarytable' >
+				<!--<tr>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Group ID-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Description-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Limit By-->
+					<!--</th>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type="text" name='groupid'/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type="text" name='description'/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<select name='LimitBy' >-->
+							<!--<option value='quota' >quota</option>-->
+							<!--<option value='balance' selected >balance</option>-->
+							<!--<option value='noquota' >noquota</option>-->
+							<!--<option value='nocharge' >nocharge</option>-->
+							<!--<option value='noprint' >noprint</option>-->
+						<!--</select>-->
+					<!--</td>-->
+				<!--</tr>-->
+				<tr>
+					<th class='settingstableheader'>
+						Group ID
+					</th>
+					<td class='summarytabledata'>
+						<input type="text" name='groupid'/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Description
+					</th>
+					<td class='summarytabledata'>
+						<input type="text" name='description'/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Limit By
+					</th>
+					<td class='summarytabledata'>
+						<select name='LimitBy' >
+							<option value='quota' >quota</option>
+							<option value='balance' selected >balance</option>
+							<option value='noquota' >noquota</option>
+							<option value='nocharge' >nocharge</option>
+							<option value='noprint' >noprint</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>		
+					<td>
+						<div class='submitbuttonlarge'>
+							<input class='button' type="submit" value="Add Group" name="addgroup">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</html>

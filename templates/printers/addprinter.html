@@ -1,0 +1,108 @@
+<html>
+	{% include 'header.html' %}
+	<div class='pagesubtitle'>
+		Add a Printer
+	</div>
+	<p/>
+	<div class='summarytablewrapper'>
+		<form action="/addprinter" method="post">
+			<table class='summarytable'>
+				<!--<tr>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Printer ID-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Price Per Page-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Price Per Job-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Max Job Size-->
+					<!--</th>-->
+					<!--<th class='summarytableheader'>-->
+						<!--Passthrough Mode-->
+					<!--</th>-->
+				<!--</tr>-->
+				<!--<tr>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type='text' name="Name"/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type='text' name='PricePerPage'/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type="text" name="PricePerJob"/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<input type="text" name="MaxJobSize"/>-->
+					<!--</td>-->
+					<!--<td class='summarytabledata'>-->
+						<!--<select name='PassthroughMode'style="width: 150;" >-->
+							<!--<option value='True' >True</option>-->
+							<!--<option value='False' selected >False</option>-->
+						<!--</select>-->
+					<!--</td>-->
+				<!--</tr>-->
+				<tr>
+					<th class='settingstableheader'>
+						Printer ID
+					</th>
+					<td class='summarytabledata'>
+						<input type='text' name="Name"/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Price Per Page
+					</th>
+					<td class='summarytabledata'>
+						<input type='text' name='PricePerPage'/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Price Per Job
+					</th>
+					<td class='summarytabledata'>
+						<input type="text" name="PricePerJob"/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Max Job Size
+					</th>
+					<td class='summarytabledata'>
+						<input type="text" name="MaxJobSize"/>
+					</td>
+				</tr>
+				<tr>
+					<th class='settingstableheader'>
+						Passthrough Mode
+					</th>
+					<td class='summarytabledata'>
+						<select name='PassthroughMode'style="width: 150;" >
+							<option value='True' >True</option>
+							<option value='False' selected >False</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+						<div style="width: 90;" class='submitbuttonlarge'>
+							<input class='button' type="submit" value="Add Printer" name="addprinter">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</html>

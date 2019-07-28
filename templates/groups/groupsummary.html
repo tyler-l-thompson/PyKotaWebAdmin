@@ -1,0 +1,221 @@
+<div class='pagesubtitle' >
+		Group Summary
+</div>
+<p/>
+<div class='summarytablewrapper' >
+	<table class='summarytable'>
+		<tr>
+			<th class='summarytableheader'>
+				Group ID
+			</th>
+			<th class='summarytableheader'>
+				Description
+			</th>
+			<th class='summarytableheader'>
+				Group Balance
+			</th>
+			<th class='summarytableheader'>
+				Life Time Paid
+			</th>
+			<th class='summarytableheader'>
+				Limit By
+			</th>
+			{% if summaryview == "edit" %}
+				<th colspan="2" class='summarytableheader'>
+					Group Members
+				</th>
+				<th class='summarytableheader'>
+					Delete
+				</th>
+			{% endif %}
+			{% if summaryview == 'read' and request.path == '/groups' %}
+				<th class='summarytableheader'>
+					Users
+				</th>
+			{% endif %}
+		</tr>
+		
+		{% if summaryview == "read" %}
+			{% for group in groups %}
+			<tr>
+				<td class='summarytabledata'>
+						{{ group.Name }}
+				</td>
+				<td class='summarytabledata'>
+						{{ group.Description }}
+				</td>
+				<td class='summarytabledata'>
+						{{ group.AccountBalance }}
+				</td>
+				<td class='summarytabledata'>
+						{{ group.LifeTimePaid }}
+				</td>
+				<td class='summarytabledata'>
+						{{ group.LimitBy }}
+				</td>
+				{% if summaryview == 'read' and request.path == '/groups' %}
+				<td class='summarytabledata'>
+					<form action='groups' method='post'>
+						<input class='buttonsmall' type="submit" value="View" name="view{{ group.Name }}">
+					</form>
+				</td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		{% elif summaryview == "edit" %}
+			{% for group in groups | sort(attribute="Name") %}
+				<form action='/savegroups' method='post'>
+					<tr>
+						<td class='summarytabledata'>
+							{{ group.Name }}
+							<input type="hidden" name="groupid{{loop.index}}" value="{{ group.Name }}" />
+						</td>
+						<td class='summarytabledata'>
+							<input type="text" name='Description{{loop.index}}' placeholder='{{ group.Description }}'/>
+						</td>
+						<td class='summarytabledata'>
+							{{ group.AccountBalance }}
+						</td>
+						<td class='summarytabledata'>
+							{{ group.LifeTimePaid }}
+						</td>
+						<td class='summarytabledata'>
+							<select name='LimitBy{{loop.index}}' >
+								<option value='quota' {% if group.LimitBy == 'quota' %} selected {% endif %}>quota</option>
+								<option value='balance' {% if group.LimitBy == 'balance' %} selected {% endif %}>balance</option>
+								<option value='noquota' {% if group.LimitBy == 'noquota' %} selected {% endif %}>noquota</option>
+							</select>
+						</td>
+						<td class='summarytabledata'>
+								<input class='buttonsmall' type="submit" value="Edit" name="edit{{ group.Name }}" />
+						</td>
+						<td class='summarytabledata'>
+								<input class='buttonsmall' type="submit" value="Add" name="add{{ group.Name }}">
+						</td>
+						<td class='summarytabledata'>
+							<input class='checkbox' type="checkbox" name='delete{{loop.index}}'/>
+						</td>
+					</tr>
+				{% endfor %}
+				
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+						<div class='submitbutton'>
+							<input class='button' type="submit" value="Save" name="save">
+						</div>
+					</td>
+				</tr>
+			</form>
+		{% endif %}
+	</table>
+</div>
+
+{% if users is defined and request.path == '/groups' %}
+		{% include 'users/usersummary.html' %}
+{% endif %}
+
+{% if users is defined and request.path == '/editgroup' %}
+	<div class='pagesubtitle' >
+		{{ summarytitle }}
+		
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+		<form action="/savegroups" method="post">
+			<table class='summarytable' >
+				<tr>
+					<th class='summarytableheader'>
+						User ID
+					</th>
+					<th class='summarytableheader'>
+						Description
+					</th>
+					<th style="width: 40; padding-left: 0; padding-right: 0;" class='summarytableheader'>
+						Delete
+					</th>
+				</tr>
+				{% for user in users | sort(attribute=session['sorton']) %}
+					<tr>
+						<td class='summarytabledata'>
+							{{ user.Name }}
+							<input type="hidden" name="userid{{ loop.index }}" value="{{ user.Name }}" />
+						</td>
+						<td class='summarytabledata'>
+							{{ user.Description }}
+						</td>
+						<td style="width: 40; " class='summarytabledata'>
+								<input class='checkbox' type="checkbox" name="delete{{loop.index}}"/>
+								<input type="hidden" name="deleteuserfromgroup" value="True" />
+						</td>
+					</tr>
+				{% endfor %}
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+						<div class='submitbutton'>
+							<input class='button' type="submit" value="Delete" name="deleteuser">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+{% endif %}
+
+{% if session['addgroup'] is defined and session['addgroup'] != None and request.path == '/editgroup' %}
+	<p/>
+	<div class="pagesubtitle">
+		Add users to group {{ session['addgroup'] }}
+	</div>
+	<div class='message' >
+		User IDs to add. Separated by commas.
+	</div>
+	<div class='messagesmall' >
+		e.g. user1,user2,user3
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+		<form action="/savegroups" method="post">
+			<table class="summarytable">
+				<tr>
+					<th class="summarytableheader">
+						User IDs
+					</th>
+				</tr>
+				<tr>
+					<td class="summarytabledata">
+						<textarea name='adduserids'></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<div class='submitbutton'>
+							<input class='button' type="submit" value="Add" name="add">
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+{% endif %}
+
+
+
+

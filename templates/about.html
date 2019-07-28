@@ -1,0 +1,89 @@
+<html>
+{% include 'header.html' %}
+
+    <div class="summarytablewrapper">
+        <table class="summarytable">
+            <tr>
+                <th class="settingstableheader">
+                    Author
+                </th>
+                <td class="summarytabledata">
+                    {{ git.author }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Author Contact
+                </th>
+                <td class="summarytabledata">
+                    {{ git.authorContact }}
+                </td>
+            </tr>
+            <!--<tr>-->
+                <!--<th class="settingstableheader">-->
+                    <!--Program Description-->
+                <!--</th>-->
+                <!--<td class="summarytabledata">-->
+                    <!--{{ git.description }}-->
+                <!--</td>-->
+            <!--</tr>-->
+            <tr>
+                <th class="settingstableheader">
+                    Git Branch
+                </th>
+                <td class="summarytabledata">
+                    {{ git.branch }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Git Remote
+                </th>
+                <td class="summarytabledata">
+                    {{ git.remote }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Git Commit Version
+                </th>
+                <td class="summarytabledata">
+                    {{ git.commit }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Git Commit Date
+                </th>
+                <td class="summarytabledata">
+                    {{ git.lastCommittedDate }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Working Directory
+                </th>
+                <td class="summarytabledata">
+                    {{ git.repoRoot }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    Cups Version
+                </th>
+                <td class="summarytabledata">
+                    {{ cupsVersion }}
+                </td>
+            </tr>
+            <tr>
+                <th class="settingstableheader">
+                    PyKota Version
+                </th>
+                <td class="summarytabledata">
+                    {{ session['version'] }}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</html>

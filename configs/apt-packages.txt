@@ -1,0 +1,4 @@
+cups
+libcups2-dev
+python-pip
+python-ldap

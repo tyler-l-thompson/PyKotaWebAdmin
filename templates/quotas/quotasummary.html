@@ -1,0 +1,128 @@
+    <div class="pagesubtitle">
+        {{ summarytype }} Quota Summary
+    </div>
+    <p/>
+    <!--<div class="messagesmall" >
+        Date Limit Format: YYYY-MM-DD HH:MM:SS
+    </div>
+    <p/>-->
+    <div class="summarytablewrapper">
+        <table class="summarytable">
+            <tr>
+                <th class="summarytableheader">
+                    Printer ID
+                </th>
+                <th class="summarytableheader">
+                    {% if summarytype == 'Printer' %}
+                        Group / User ID
+                    {% else %}
+                        {{ summarytype }} ID
+                    {% endif %}
+                </th>
+                <th class="summarytableheader">
+                    Page Counter
+                </th>
+                <th class="summarytableheader">
+                    Life Time Page Counter
+                </th>
+                <th class="summarytableheader">
+                    Soft Limit
+                </th>
+                <th class="summarytableheader">
+                    Hard Limit
+                </th>
+                <th class="summarytableheader">
+                    Date Limit
+                    <div style="font-size: 10; text-align: center; font-weight: normal;">
+                        YYYY-MM-DD HH:MM:SS
+                    </div>
+                </th>
+            </tr>
+            {% if summaryview == "read" %}
+                {% for quota in quotas %}
+                    <tr>
+                        <td class="summarytabledata">
+                            {{ quota.Printer.Name }}
+                        </td>
+                        <td class="summarytabledata">
+                            {% if quota.Group is defined %}
+                                {{ quota.Group.Name }}
+                            {% else %}
+                                {{ quota.User.Name }}
+                            {% endif %}
+                        </td>
+                        <td class="summarytabledata">
+                            {{ quota.PageCounter }}
+                        </td>
+                        <td class="summarytabledata">
+                            {{ quota.LifePageCounter }}
+                        </td>
+                        <td class="summarytabledata">
+                            {% if quota.SoftLimit == 0 %} None {% else %} {{ quota.SoftLimit }} {% endif %}
+                        </td>
+                        <td class="summarytabledata">
+                            {% if quota.HardLimit == 0 %} None {% else %} {{ quota.HardLimit }} {% endif %}
+                        </td>
+                        <td class="summarytabledata">
+                            {{ quota.DateLimit }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% elif summaryview == "edit" %}
+                {% for quota in quotas %}
+                    <form action="/savequotas" method="post">
+                        <tr>
+                            <td class="summarytabledata">
+                                {{ quota.Printer.Name }}
+                                <input type="hidden" name="printerId{{ loop.index }}" value="{{ quota.Printer.Name }}"/>
+                            </td>
+                            <td class="summarytabledata">
+                                {% if quota.Group is defined %}
+                                    {{ quota.Group.Name }}
+                                    <input type="hidden" name="groupId{{ loop.index }}" value="{{ quota.Group.Name }}"/>
+                                {% else %}
+                                    {{ quota.User.Name }}
+                                    <input type="hidden" name="userId{{ loop.index }}" value="{{ quota.User.Name }}"/>
+                                {% endif %}
+                            </td>
+                            <td class="summarytabledata">
+                                {{ quota.PageCounter }}
+                            </td>
+                            <td class="summarytabledata">
+                                {{ quota.LifePageCounter }}
+                            </td>
+                            <td class="summarytabledata">
+                                <input class='inputplaceholder' type="text" name="SoftLimit{{ loop.index }}" placeholder="{% if quota.SoftLimit == 0 %} None {% else %} {{ quota.SoftLimit }} {% endif %}"/>
+                            </td>
+                            <td class="summarytabledata">
+                                <input class='inputplaceholder' type="text" name="HardLimit{{ loop.index }}" placeholder="{% if quota.HardLimit == 0 %} None {% else %} {{ quota.HardLimit }} {% endif %}"/>
+                            </td>
+                            <td class="summarytabledata">
+                                <input type="text" name="DateLimit{{ loop.index }}" placeholder="{{ quota.DateLimit }}"/>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <div class='submitbutton'>
+                                    <input class='button' type="submit" value="Save" name="saveusergroupquota">
+                                </div>
+                            </td>
+                        </tr>
+                    </form>
+
+            {% endif %}
+        </table>
+    </div>

@@ -1,0 +1,132 @@
+	<div class='pagesubtitle' >
+		{% if summarytitle is undefined %}
+			User Summary
+		{% else %}
+			{{ summarytitle }}
+		{% endif %}
+	</div>	
+	<p></p>
+	<div class='summarytablewrapper' >
+		<table class='summarytable'>
+			<form action='/sorton' method='post'>
+				<input type="hidden" name="returnurl" value="{{ returnurl }}" />
+				<tr>
+					<th class='summarytableheader'>
+						<input style="width: 75;" class='headerbutton' type="submit" value="User ID" name="sorton">
+					</th>
+					<th class='summarytableheader'>
+						<input style="width: 210;" class='headerbutton' type="submit" value="Email" name="sorton">
+					</th>
+					<th class='summarytableheader'>
+						<input style="width: 210;" class='headerbutton' type="submit" value="Description" name="sorton">
+					</th>
+					<th class='summarytableheader'>
+						<input style="width: 80;" class='headerbutton' type="submit" value="Account Balance" name="sorton">
+					</th> 
+					<th class='summarytableheader'>
+						<input style="width: 80;" class='headerbutton' type="submit" value="Life Time Paid" name="sorton">
+					</th>
+					<th class='summarytableheader'>
+						<input style="width: 90;" class='headerbutton' type="submit" value="Overcharge Factor" name="sorton">
+					</th>
+					<th class='summarytableheader'>
+						<input style="width: 80;" class='headerbutton' type="submit" value="Limit By" name="sorton">
+					</th>
+					{% if summaryview == "edit" %}
+					<th style="width: 30;" class='summarytableheader'>
+						Delete
+					</th>
+					{% endif %}
+				</tr>
+			</form>
+			{% if summaryview == "read" %}
+				{% for user in users | sort(attribute=session['sorton']) %}
+					<tr>
+						<td class='summarytabledata'>
+							{{ user.Name }}
+						</td>
+						<td class='summarytabledata'>
+							{{ user.Email }}
+						</td>
+						<td class='summarytabledata'  >
+							{{ user.Description }}
+						</td>
+						<td class='summarytabledata'>
+							{{ user.AccountBalance }}
+						</td>
+						<td class='summarytabledata'>
+							{{ user.LifeTimePaid }}
+						</td>
+						<td class='summarytabledata'>
+							{{ user.OverCharge }}
+						</td>
+						<td class='summarytabledata'>
+							{{ user.LimitBy }}
+						</td>
+					</tr>
+				{% endfor %}
+			{% elif summaryview == "edit" %}
+				{% for user in users | sort(attribute=session['sorton']) %}
+				<form action='/saveusers' method='post'>
+				<tr>
+					<td class='summarytabledata'>
+						{{ user.Name }}
+						<input type="hidden" name="username{{loop.index}}" value="{{ user.Name }}" />
+					</td>
+					<td class='summarytabledata'>
+						<input style="width: 210;" type="email" name='Email{{loop.index}}' placeholder='{{ user.Email }}'/>
+					</td>
+					<td class='summarytabledata'>
+						<input style="width: 210;" type="text" name='Description{{loop.index}}' placeholder='{{ user.Description }}'/>
+					</td>
+					<td class='summarytabledata'>
+						<input class='inputplaceholder' type="text" name='AccountBalance{{loop.index}}' placeholder='{{ user.AccountBalance }}'/>
+					</td>
+					<td class='summarytabledata'>
+						{{ user.LifeTimePaid }}
+					</td>
+					<td class='summarytabledata'>
+						<input class='inputplaceholder' type="text" name='OverCharge{{loop.index}}' placeholder='{{ user.OverCharge }}'/>
+					</td>
+					<td class='summarytabledata'>
+						
+						<select name='LimitBy{{loop.index}}' >
+							<option value='quota' {% if user.LimitBy == 'quota' %} selected {% endif %}>quota</option>
+							<option value='balance' {% if user.LimitBy == 'balance' %} selected {% endif %}>balance</option>
+							<option value='noquota' {% if user.LimitBy == 'noquota' %} selected {% endif %}>noquota</option>
+							<option value='nochange' {% if user.LimitBy == 'nochange' %} selected {% endif %}>nochange</option>
+							<option value='noprint' {% if user.LimitBy == 'noprint' %} selected {% endif %}>noprint</option>
+						</select>
+					</td>
+					<td style="width: 30;" class='summarytabledata'>
+						<input class='checkbox' type="checkbox" name='delete{{loop.index}}'/>
+					</td>
+				</tr>
+				{% endfor %}
+				
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+						<div class='submitbutton'>
+							<input class='button' type="submit" value="Save" name="save">
+						</div>
+					</td>
+				</tr>
+			
+		</form>
+		{% endif %}
+		</table>
+	</div>

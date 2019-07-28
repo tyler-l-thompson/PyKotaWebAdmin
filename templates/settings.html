@@ -1,0 +1,170 @@
+<html>
+    {% include 'header.html' %}
+    <form action="/settings" method="post">
+        <div class="summarytablewrapper">
+            <table class="summarytable">
+                <tr>
+                    <th class="settingstableheader">
+                        Log File Location
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="logFile" placeholder="{{ config.getConfig('logFile') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Enable User Login
+                    </th>
+                    <td class="settingstabledata">
+                        <input class='checkbox' type="checkbox" name='enableUserLogin' {% if config.getConfig('enableUserLogin') == 'True' %} checked {% endif %}/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Local Admin Username
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="localAdminUsername" placeholder="{{ config.getConfig('localAdminUsername') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Local Admin Password
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="password" style="-webkit-text-security: square;" name="localAdminPassword" placeholder="*********"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Enable Ldap for Login
+                    </th>
+                    <td class="settingstabledata">
+                        <input class='checkbox' type="checkbox" name='loginUseLdap' {% if config.getConfig('loginUseLdap') == 'True' %} checked {% endif %}/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Server Address
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="loginLdapServerAddress" placeholder="{{ config.getConfig('loginLdapServerAddress') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Base DN
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="loginLdapBaseDN" placeholder="{{ config.getConfig('loginLdapBaseDN') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Admin DN
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="loginLdapAdminDN" placeholder="{{ config.getConfig('loginLdapAdminDN') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Admin Password
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="password" style="-webkit-text-security: square;" name="loginLdapAdminPass" placeholder="*********"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Valid Groups
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="loginLdapGroups" placeholder="{{ config.getConfig('loginLdapGroups') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Login Ldap Valid Users
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="loginLdapUsers" placeholder="{{ config.getConfig('loginLdapUsers') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Enable User Backend
+                    </th>
+                    <td class="settingstabledata">
+                        <input class='checkbox' type="checkbox" name='enableUserBackend' {% if config.getConfig('enableUserBackend') == 'True' %} checked {% endif %}/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        User Backend Ldap Server Address
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="userBackendLdapServerAddress" placeholder="{{ config.getConfig('userBackendLdapServerAddress') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        User Backend Ldap Base DN
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="userBackendLdapBaseDN" placeholder="{{ config.getConfig('userBackendLdapBaseDN') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        User Backend Ldap Admin DN
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="userBackendLdapAdminDN" placeholder="{{ config.getConfig('userBackendLdapAdminDN') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        User Backend Ldap Admin Password
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="password" style="-webkit-text-security: square;" name="userBackendLdapAdminPassword" placeholder="*********" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Server Listen Port
+                    </th>
+                    <td class="settingstabledata">
+                        <input class="inputplaceholderwide" type="text" name="serverListenPort" placeholder="{{ config.getConfig('serverListenPort') }}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Enable Flask Web Debug
+                    </th>
+                    <td class="settingstabledata">
+                        <input class='checkbox' type="checkbox" name='flaskWebDebug' {% if config.getConfig('flaskWebDebug') == 'True' %} checked {% endif %}/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="settingstableheader">
+                        Enable SSL
+                    </th>
+                    <td class="settingstabledata">
+                        <input class='checkbox' type="checkbox" name='enableSSL' {% if config.getConfig('enableSSL') == 'True' %} checked {% endif %}/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <div class='submitbutton'>
+                            <input class='button' type="submit" value="Save" name="savesettings">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</html>

@@ -1,0 +1,155 @@
+<html>
+    {% include 'header.html' %}
+    <div class='summarytablewrapper' >
+        <table class="summarytable">
+            <tr>
+                <th class="summarytableheader">
+                    Printer ID
+                </th>
+                <th class="summarytableheader" colspan="2">
+                    Quota Members
+                </th>
+            </tr>
+            {% for printer in printers %}
+                <form action="/printerquotas" method="post">
+                    <tr>
+                        <td class="summarytabledata">
+                            {{ printer.Name }}
+                            <input type="hidden" name="printerId" value="{{ printer.Name }}"/>
+                        </td>
+                        <td class='summarytabledata'>
+                            <input class='buttonsmall' type="submit" value="Edit" name="edit" />
+                        </td>
+                        <td class='summarytabledata'>
+                            <input class='buttonsmall' type="submit" value="Add" name="add">
+                        </td>
+                    </tr>
+                </form>
+            {% endfor %}
+        </table>
+    </div>
+
+    {% if session['addprinterquota'] is defined and session['addprinterquota'] != None %}
+        <p/>
+        <div class="pagesubtitle">
+            Add users or groups to printer {{ session['addprinterquota'] }}
+        </div>
+        <div class='message' >
+            User or Group IDs to add. Separated by commas.
+        </div>
+        <div class='messagesmall' >
+            e.g. user1,group2,user3
+        </div>
+        <p/>
+        <div class='summarytablewrapper' >
+            <form action="/savequotas" method="post">
+                <table class="summarytable">
+                    <tr>
+                        <th class="summarytableheader">
+                            User or Group IDs
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="summarytabledata">
+                            <textarea name='addids'></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <div class='submitbutton'>
+                                <input class='button' type="submit" value="Add" name="addusergroupquotas">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    {% endif %}
+
+    {% if printerQuotaGroupMembers != None and session['editprinterquota'] != None %}
+        <div class="pagesubtitle">
+            {{ session['editprinterquota'] }} Quota Group Members
+        </div>
+        <p/>
+        <form action="/savequotas" method="post">
+            <div class='summarytablewrapper' >
+                <table class="summarytable">
+                    <tr>
+                        <th class="summarytableheader">
+                            Group ID
+                        </th>
+                        <th class="summarytableheader">
+                            Delete
+                        </th>
+                    </tr>
+                    {% for printerQuotaGroup in printerQuotaGroupMembers %}
+                        <tr>
+                            <td class="summarytabledata">
+                                {{ printerQuotaGroup.Group.Name }}
+                                <input type="hidden" name="groupId{{ loop.index }}" value="{{ printerQuotaGroup.Group.Name }}"/>
+                            </td>
+                            <td class="summarytabledata">
+                                <input class='checkbox' type="checkbox" name='delete{{loop.index}}'/>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <div class='submitbutton'>
+                                <input class='button' type="submit" value="Save" name="deletegroups">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    {% endif %}
+    {% if printerQuotaUserMembers != None %}
+        <div class="pagesubtitle">
+            {{ session['editprinterquota'] }} Quota User Members
+        </div>
+        <p/>
+        <form action="/savequotas" method="post">
+            <div class='summarytablewrapper' >
+                <table class="summarytable">
+                    <tr>
+                        <th class="summarytableheader">
+                            User ID
+                        </th>
+                        <th class="summarytableheader">
+                            Delete
+                        </th>
+                    </tr>
+                    {% for printerQuotaUser in printerQuotaUserMembers %}
+                        <tr>
+                            <td class="summarytabledata">
+                                {{ printerQuotaUser.User.Name }}
+                                <input type="hidden" name="userId{{ loop.index }}" value="{{ printerQuotaUser.User.Name }}"/>
+                            </td>
+                            <td class="summarytabledata">
+                                <input class='checkbox' type="checkbox" name='delete{{loop.index}}'/>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <div class='submitbutton'>
+                                <input class='button' type="submit" value="Save" name="deleteusers">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    {% endif %}
+</html>

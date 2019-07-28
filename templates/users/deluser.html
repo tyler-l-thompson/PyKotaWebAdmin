@@ -1,0 +1,75 @@
+<html>
+	{% include 'header.html' %}	
+<!--	<div class='pagesubtitle' >
+		Delete by class CRN
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+	<form action="/deluser" method='post' >
+		<table class='summarytable' >
+			<tr>
+				<td>
+					<input type='text' name='classcrn' placeholder='CRN'/>
+				</td>
+				<td>
+					<input class='button' type="submit" value="Delete All">
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	<br/> -->
+	
+	<div class='pagesubtitle'>
+		Delete Users in Group
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+		<form action="/deluser" method="post">
+			<table class='summarytable'>
+				<tr>
+					<td>
+						<input type='text' name='groupid' placeholder='Group ID' />
+					</td>
+					<td>
+						<input type='submit' class='button' value='Delete All' />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<br/>
+	<div class='pagesubtitle' >
+		Delete by list
+	</div>
+	
+	<div class='message' >
+		User IDs to delete. Separated by commas.
+	</div>
+	<div class='messagesmall' >
+		e.g. user1,user2,user3
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+	<form action='/deluser' method='post'>
+		<table class='summarytable'>
+			<tr>
+				<td style="width: 350; height: 100;">
+					<textarea rows="5" cols="50" name='usernames' ></textarea>
+				</td>
+				<td>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<div class='submitbuttonlarge'>
+						<input class='button' type="submit" value="Delete All">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</html>

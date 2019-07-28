@@ -1,0 +1,107 @@
+<div class='pagesubtitle' >
+		Printer Summary
+</div>
+<p></p>
+<div class='summarytablewrapper' >
+	<table class='summarytable'>
+		<tr>
+			<th class='summarytableheader'>		
+				Printer ID
+			</th>
+			<th class='summarytableheader'>		
+				Price Per Page
+			</th>
+			<th class='summarytableheader'>		
+				Price Per Job
+			</th>
+			<th class='summarytableheader'>		
+				Max Job Size
+			</th>
+			<th class='summarytableheader' style="width: 150;">
+				Passthrough Mode
+			</th>
+			{% if summaryview == "edit" %}
+				<th class='summarytableheader'>
+					Delete
+				</th>
+			{% endif %}
+		</tr>
+		{% if summaryview == "read" or summaryview is undefined %}
+			{% for printer in printers | sort(attribute="Name") %}
+				<tr>
+					<td class='summarytabledata'>
+						{{ printer.Name }}
+					</td>
+					<td class='summarytabledata'>
+						{{ printer.PricePerPage }}
+					</td>
+					<td class='summarytabledata'>
+						{{ printer.PricePerJob }}
+					</td>
+					<td class='summarytabledata'>
+						{% if printer.MaxJobSize == 0 %}
+							Unlimited
+						{% else %}
+							{{ printer.MaxJobSize }}
+						{% endif %}
+					</td>
+					<td class='summarytabledata'>
+						{{ printer.PassThrough }}
+					</td>
+				</tr>
+			{% endfor %}
+		{% elif summaryview == "edit" %}
+		<form action="/saveprinters" method="post">
+			{% for printer in printers | sort(attribute="Name") %}
+				<tr>
+					<td class='summarytabledata'>
+						{{ printer.Name }}
+						<input type="hidden" name="printerid{{loop.index}}" value="{{ printer.Name }}" />
+					</td>
+					<td class='summarytabledata'>
+						<input type="text" class='inputplaceholder' name="PricePerPage{{ loop.index }}" placeholder="{{ printer.PricePerPage }}"/>
+					</td>
+					<td class='summarytabledata'>
+						<input type="text" class='inputplaceholder' name="PricePerJob{{ loop.index }}" placeholder="{{ printer.PricePerJob }}"/>
+					</td>
+					<td class='summarytabledata'>
+						<input type="text" class='inputplaceholder' name="MaxJobSize{{ loop.index }}" placeholder="{{ printer.MaxJobSize }}"/>
+					</td>
+					<td class='summarytabledata'>
+						<select name='PassthroughMode{{loop.index}}' >
+							<option value='True' {% if printer.PassThrough == True %} selected {% endif %}>True</option>
+							<option value='False' {% if printer.PassThrough == False %} selected {% endif %}>False</option>
+						</select>
+					</td>
+					<td class='summarytabledata'>
+						<input class='checkbox' type="checkbox" name='delete{{loop.index}}'/>
+					</td>
+				</tr>
+
+			{% endfor %}
+				<tr>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+					</td>
+					<td>
+						<div class='submitbutton'>
+							<input class='button' type="submit" value="Save" name="save">
+						</div>
+					</td>
+				</tr>
+		{% endif %}
+		</form>
+	</table>
+</div>
+	
+	
+	

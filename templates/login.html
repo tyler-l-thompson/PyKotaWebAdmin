@@ -1,0 +1,42 @@
+<html>
+{% include 'header.html' %}
+	<body>
+		<form action="/login" method='POST'>
+			<table class="logintable">
+				<tr>
+					<td>
+					</td>
+					<td class='logintitle'>
+							Admin Login
+					</td>
+				</tr>
+				<tr>
+					<td class='login' >
+						User ID
+					</td>
+					<td class='login' >
+						<input type="text" name='username'/>
+					</td>
+				</tr>
+				<tr>
+					<td class='login' >
+						Password
+					</td>
+					<td class='login' >
+						<input type="password" style="-webkit-text-security: square;" name='password'/>
+					</td>
+				</tr>
+				<tr>
+					<td class='login' >
+					</td>
+					<td class='login' >
+					</td>
+					<td class='loginButton' >
+						<input class='button' type='submit' value='Login' />
+					</td>
+				</tr>
+			</table>
+
+		</form>
+	</body>
+</html>

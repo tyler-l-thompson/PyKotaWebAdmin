@@ -1,0 +1,281 @@
+<html>
+	{% include 'header.html' %}	
+	{% if config.getConfig('enableUserBackend') == "True" %}
+	<div class='pagesubtitle' >
+		Add users by class CRN
+	</div>
+	<div class="titledoc" style="margin-left: 250;">
+		WMU Current Term: {{wmuCurrentTerm}}
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+	<form action='/adduser' method='post'>
+	<input type='hidden' name='addtype' value='classcrn'/> 
+		<table class='summarytable' >
+			<!--<tr>-->
+				<!--<th class='summarytableheader'>-->
+					<!--CRN-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Starting Account Balance-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Overcharge Factor-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Limit By-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Group (Optional)-->
+				<!--</th>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name='crn'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input class='inputplaceholder' type="text" name='AccountBalance'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input class='inputplaceholder' type="text" name='OverCharge'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<select name='LimitBy' >-->
+						<!--<option value='quota' >quota</option>-->
+						<!--<option value='balance' selected >balance</option>-->
+						<!--<option value='noquota' >noquota</option>-->
+						<!--<option value='nocharge' >nocharge</option>-->
+						<!--<option value='noprint' >noprint</option>-->
+					<!--</select>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name="userGroup" />-->
+				<!--</td>-->
+			<!--</tr>-->
+			<tr>
+				<th class='settingstableheader'>
+					WMU Term
+				</th>
+				<td class='summarytabledata'>
+					<select name='wmuTerm' >
+						{% for term in terms %}
+							{% if term[1] == wmuCurrentTerm %}
+								<option value='{{term}}' selected>{{term[1]}}</option>
+							{% else %}
+								<option value='{{term}}' >{{term[1]}}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					CRN
+				</th>
+				<td class='summarytabledata'>
+					<input type="text" name='crn'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Starting Account Balance
+				</th>
+				<td class='summarytabledata'>
+					<input class='inputplaceholder' type="text" name='AccountBalance'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Overcharge Factor
+				</th>
+				<td class='summarytabledata'>
+					<input class='inputplaceholder' type="text" name='OverCharge'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Limit By
+				</th>
+				<td class='summarytabledata'>
+					<select name='LimitBy' >
+						<option value='quota' >quota</option>
+						<option value='balance' selected >balance</option>
+						<option value='noquota' >noquota</option>
+						<option value='nocharge' >nocharge</option>
+						<option value='noprint' >noprint</option>
+					</select>
+				</td>
+			</tr>
+			<!--<tr>-->
+				<!--<th class='settingstableheader'>-->
+					<!--Group (Optional)-->
+				<!--</th>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name="userGroup" />-->
+				<!--</td>-->
+			<!--</tr>-->
+			<tr>
+				<th class='settingstableheader'>
+					Auto Quota Setup
+				</th>
+				<td class='summarytabledata'>
+					<input class='checkbox' type="checkbox" name='autoQuotaSetup' checked/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+					<div class='submitbuttonlarge'>
+						<input class='button' type="submit" value="Add Users" name="addusers">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	{% endif %}
+
+	<div class='pagesubtitle' >
+		Add single user
+	</div>
+	<p/>
+	<div class='summarytablewrapper' >
+	<form action='/adduser' method='post'>
+	<input type='hidden' name='addtype' value='singleuser'/> 
+		<table class='summarytable' >
+			<!--<tr>-->
+				<!--<th class='summarytableheader'>-->
+					<!--User ID-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Email-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Description-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Starting Account Balance-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Overcharge Factor-->
+				<!--</th>-->
+				<!--<th class='summarytableheader'>-->
+					<!--Limit By-->
+				<!--</th>-->
+			<!--</tr>-->
+			<!--<tr>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name='username'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name='Email'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input type="text" name='Description'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input class='inputplaceholder' type="text" name='AccountBalance'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<input class='inputplaceholder' type="text" name='OverCharge'/>-->
+				<!--</td>-->
+				<!--<td class='summarytabledata'>-->
+					<!--<select name='LimitBy' >-->
+						<!--<option value='quota' >quota</option>-->
+						<!--<option value='balance' selected >balance</option>-->
+						<!--<option value='noquota' >noquota</option>-->
+						<!--<option value='nocharge' >nocharge</option>-->
+						<!--<option value='noprint' >noprint</option>-->
+					<!--</select>-->
+				<!--</td>-->
+			<!--</tr>-->
+			<tr>
+				<th class='settingstableheader'>
+					User ID
+				</th>
+				<td class='summarytabledata'>
+					<input type="text" name='username'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Email
+				</th>
+				<td class='summarytabledata'>
+					<input type="text" name='Email'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Description
+				</th>
+				<td class='summarytabledata'>
+					<input type="text" name='Description'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Starting Account Balance
+				</th>
+				<td class='summarytabledata'>
+					<input class='inputplaceholder' type="text" name='AccountBalance'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Overcharge Factor
+				</th>
+				<td class='summarytabledata'>
+					<input class='inputplaceholder' type="text" name='OverCharge'/>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Limit By
+				</th>
+				<td class='summarytabledata'>
+					<select name='LimitBy' >
+						<option value='quota' >quota</option>
+						<option value='balance' selected >balance</option>
+						<option value='noquota' >noquota</option>
+						<option value='nocharge' >nocharge</option>
+						<option value='noprint' >noprint</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class='settingstableheader'>
+					Auto Quota Setup
+				</th>
+				<td class='summarytabledata'>
+					<input class='checkbox' type="checkbox" name='autoQuotaSetup' checked/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>		
+				<td>
+					<div class='submitbuttonlarge'>
+						<input class='button' type="submit" value="Add User" name="adduser">
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+</html>

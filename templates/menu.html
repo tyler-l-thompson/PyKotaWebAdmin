@@ -1,0 +1,127 @@
+<div class='menuwrapper' >
+<table class='menutable' {% if session['logged_in'] == True and session['username'] is defined %} style="height: 630;"  {% endif %} >
+	<tr>
+	</tr>
+	<tr>
+		<td class='menutitle'>
+			Menu
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<a 
+			{% if current_menu.active %}
+				class="menuactive"
+			{% else %}
+				class="menu"
+			{% endif %}
+				href="{{ current_menu.url}}">{{ current_menu.text }}</a>
+		</td>
+	</tr>
+	
+	{%- for item in current_menu.children %}
+		<tr>
+			<td>
+			
+			<a 
+			{% if item.active %}
+				class="menuchildactive"
+			{% else %}
+				class="menuchild"
+			{% endif %}
+				href="{{ item.url}}"><img border='0' alt='arrow' src='/static/90degreearrow.png' width='15' height='15'>{{ item.text }}</a>
+			</td>
+		</tr>
+	
+		
+			{% for child in item.children %}
+				{% if item.active %}
+					
+					
+						<tr>
+							<td>
+								<a 
+								{% if child.active %}
+									class="menusubchildactive"
+								{% else %}
+									class="menusubchild"
+								{% endif %}
+									href="{{ child.url}}"><img border='0' alt='arrow' src='/static/90degreearrow.png' width='15' height='15'>{{ child.text }}</a>
+							
+							</td>
+						</tr>
+				
+				{% elif child.active %}
+					
+					{% for child in item.children %}
+						
+						<tr>
+							<td>
+								<a 
+								{% if child.active %}
+									class="menusubchildactive"
+								{% else %}
+									class="menusubchild"
+								{% endif %}
+									href="{{ child.url}}"><img border='0' alt='arrow' src='/static/90degreearrow.png' width='15' height='15'>{{ child.text }}</a>
+							
+							</td>
+						</tr>
+						
+					{% endfor %}
+					
+				{% endif %}
+			{% endfor %}
+
+	{% endfor -%}
+	
+	<tr>
+	</tr>
+	<tr>
+	</tr>
+	<tr>
+	</tr>
+	<tr>
+	</tr>
+	
+	<tr>
+		<td>
+			<div class='menuversion'>
+				PyKota Version:
+				<div style="padding-left: 30;" >
+					{{ session['version'] }}
+				</div>
+			</div>
+		</td>
+	</tr>
+	
+</table>
+
+</div>
+
+
+{%- for item in current_menu.children %}
+
+		{%- for child in item.children %}
+			{% if child.active %}
+				<div class='pagetitle'>
+					{{ child.text }}
+				</div>
+				<p/>
+			{% endif %}
+		{% endfor %}
+
+	{% if item.active %}
+		<div class='pagetitle'>
+			{{ item.text }}
+		</div>
+		<p/>
+	{% endif %}
+{% endfor %}
+{% if current_menu.active %}
+	<div class='pagetitle'>
+			{{ current_menu.text }}
+	</div>
+	<p/>
+{% endif %}

@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<link rel= 'stylesheet' type= 'text/css' href= '/static/styles.css'/>
+		<link rel="shortcut icon" type="image/x-icon" href="/static/favicon.png" />
+		<title>
+			PyKotaWebAdmin
+		</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<div class='title'>
+						<a href="http://www.pykota.com/">
+							<img border='0' alt='arrow' src='/static/pykota.png' width='100' height='100'>
+						</a>
+					</div>
+				</td>
+				<td>
+					<div class='title'>
+						PyKota Administration
+					</div>
+					<div class='titledoc'>
+						{{ session['doc'] }}
+					</div>
+				</td>
+				
+
+					<td class='userInfo'>
+						{% if session['logged_in'] == True and session['username'] is defined %}
+						<p/>
+						<div>
+							{{ session['name'] }}
+						</div>
+						<p/>
+						<div>
+							Group: {{ session['group'] }}
+						</div>
+						<div>
+							User ID: {{ session['username'] }}
+						</div>
+						{% endif %}
+						{% if session['logged_in'] == True %}
+						<div style="margin-right: 5; margin-left: auto; text-align: right; margin-top: 10; margin-bottom: 10;">
+							<a href="https://{{ session['hostip'] }}:631">CUPS Printing Queue</a>
+						</div>
+						{% endif %}
+					</td>
+
+			</tr>
+		</table>
+		{% if session['logged_in'] == True %}
+			{% include 'menu.html' %}
+		{% endif %}
+		
+	</body>
+</html>

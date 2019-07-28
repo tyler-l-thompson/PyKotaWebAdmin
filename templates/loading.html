@@ -1,0 +1,22 @@
+<html>
+    <head>
+		<META HTTP-EQUIV="refresh"  CONTENT="{{ waittime }};url={{ redirecturl }}" >
+	</head>
+    {% include 'header.html' %}
+
+    <div class="summarytablewrapper">
+        <table class="summarytable">
+            <tr>
+                <td>
+                    <img src="static/loading.gif" alt="loading" style="width: 300; height: 300;">
+                </td>
+            </tr>
+            <tr>
+                <td class="summarytabledata" style="font-size: 20;">
+                    {{ message }}
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</html>
