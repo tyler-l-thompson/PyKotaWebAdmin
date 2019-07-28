@@ -43,16 +43,6 @@ Install pakages in these files manually. Installer script coming soon!
 `service pykotawebadmin start`
 
 
-## Updating
-Currently updates must be initiated manually, but the init scripts can do it for you.
-
-```service pykotawebadmin update```
-	
-or
-	
-```/opt/PyKotaWebAdmin/configs/pykotawebadmin.init update```
-		
-
 ## Config
 PyKotaWebAdmin/config/webadmin.conf
 
