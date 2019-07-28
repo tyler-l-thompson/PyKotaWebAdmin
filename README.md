@@ -1,4 +1,4 @@
-True# PyKotaWebAdmin
+# PyKotaWebAdmin
 
 PyKotaWebAdmin is a web interface for administering PyKota
 
